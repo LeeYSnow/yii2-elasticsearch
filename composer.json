@@ -1,20 +1,20 @@
 {
-    "name": "yiisoft/yii2-elasticsearch",
+    "name": "jackson198608/yii2-elasticsearch",
     "description": "Elasticsearch integration and ActiveRecord for the Yii framework",
     "keywords": ["yii2", "elasticsearch", "active-record", "search", "fulltext"],
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/yiisoft/yii2-elasticsearch/issues",
+        "issues": "https://github.com/jackson198608/yii2-elasticsearch/issues",
         "forum": "http://www.yiiframework.com/forum/",
         "wiki": "http://www.yiiframework.com/wiki/",
         "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii2-elasticsearch"
+        "source": "https://github.com/jackson198608/yii2-elasticsearch"
     },
     "authors": [
         {
-            "name": "Carsten Brandt",
-            "email": "mail@cebe.cc"
+            "name": "Snow",
+            "email": "936792329@qq.com"
         }
     ],
     "require": {

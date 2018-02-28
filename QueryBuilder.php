@@ -103,7 +103,7 @@ class QueryBuilder extends Object
                 $parts['filter'] = ['and' => [$query->filter, $whereFilter]];
             }
         } elseif (!empty($whereFilter)) {
-            $parts['filter'] = $whereFilter;
+            $parts['post_filter'] = $whereFilter;
         }
 
         if (!empty($query->highlight)) {

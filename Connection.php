@@ -173,27 +173,14 @@ class Connection extends Component
         if (strncmp($host, 'inet[/', 6) === 0) {
             $host = substr($host, 6, -1);
         }
-        $response = $this->httpRequest('GET', "$protocol://$host/_nodes");
-        if (!empty($response['nodes'])) {
-            $nodes = $response['nodes'];
-        } else {
+        //获取elasticsearch 6.1版本活跃节点 http 访问地址
+        $response = $this->httpRequest('GET', "$protocol://$host/_cat/nodes?h=http_address");
+        if (!empty($response)) {
             $nodes = [];
-        }
-
-        foreach ($nodes as $key => &$node) {
-            // Make sure that nodes have an 'http_address' property, which is not the case
-            // if you're using AWS Elasticsearch service (at least as of Oct., 2015, still the case in July, 2017).
-            // it should be there according to the docs: https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
-            if (!isset($node['http_address'])) {
-                unset($nodes[$key]);
+            foreach ($response as $node) {
+                $nodes[] = ['http_address'=>$node];
             }
-
-            // Protocol is not a standard ES node property, so we add it manually
-            $node['protocol'] = $this->defaultProtocol;
-        }
-
-        if (!empty($nodes)) {
-            $this->nodes = array_values($nodes);
+            $this->nodes = $nodes;
         } else {
             curl_close($this->_curl);
             throw new Exception('Cluster autodetection did not find any active node. Make sure a GET /_nodes reguest on the hosts defined in the config returns the "http_address" field for each node.');
